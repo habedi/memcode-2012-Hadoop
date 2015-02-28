@@ -1,0 +1,15 @@
+bin/hdfs dfs -mkdir /user
+bin/hdfs dfs -mkdir /user/<username>
+########################################
+
+bin/hdfs dfs -mkdir /dna
+
+bin/hdfs dfs -copyFromLocal /home/raziel/meWorkspace/Memcode-2012/2012-memocode-contest/DONE2/short_sequences.fastq  /dna/short_sequences.fastq
+
+ دستور اجرای برنامه
+bin/hadoop  jar share/hadoop/tools/lib/hadoop-streaming-2.6.0.jar -input /dna/short_sequences.fastq -output /results -mapper /home/raziel/meWorkspace/Memcode-2012/2012-memocode-contest/DONE2/mapper.py -reducer /home/raziel/meWorkspace/Memcode-2012/2012-memocode-contest/DONE2/reducer.py
+
+# اگه  result وجود داشت
+bin/hdfs dfs -rm -r /results
+
+bin/hdfs dfs -copyToLocal /results /tmp/results
